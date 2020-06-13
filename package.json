@@ -1,6 +1,6 @@
 {
   "name": "travelscrum-backend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -11,6 +11,25 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
-  }
+    "pug": "^3.0.0"
+  },
+  "description": "Trave/Scrum hackathon! https://www.getroadmap.com",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roadmaptravel/travelscrum-backend.git"
+  },
+  "keywords": [
+    "travelscrum",
+    "hackathon",
+    "roadhack",
+    "roadmap"
+  ],
+  "author": "Glenn Mosdall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roadmaptravel/travelscrum-backend/issues"
+  },
+  "homepage": "https://github.com/roadmaptravel/travelscrum-backend#readme"
 }
