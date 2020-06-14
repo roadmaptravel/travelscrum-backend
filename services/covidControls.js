@@ -10,20 +10,26 @@ class CovidControls {
             searchParams.cId = countryId;
         }
 
-        const response = await got('https://prod.greatescape.co/api/travel/countries/corona/', {
-            headers: headers,
-            searchParams: searchParams
-        });
+        let responseObject = null;
+        try {
+            const response = await got('https://prod.greatescape.co/api/travel/countries/corona/', {
+                headers: headers,
+                searchParams: searchParams
+            });
+            responseObject = JSON.parse(response.body);
+            console.log(response.url);
+        } catch (error) {
+            //Try some mock data
+            responseObject = require('../mockData/covidControls.json');
+        }
 
-        const obj = JSON.parse(response.body);
-        const countryArray = _.filter(obj, { 'cId': countryId });
+        const countryArray = _.filter(responseObject, { 'cId': countryId });
         let country = null;
         if (countryArray.length > 0) {
             country = countryArray[0];
         }
         // this.printJson(country)
 
-        console.log(response.url);
         return country;
     }
 
