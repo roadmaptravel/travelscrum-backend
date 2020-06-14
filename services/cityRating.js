@@ -14,7 +14,7 @@ class CityRating {
 
     getColleagueRating() {
         let rating = 4;
-        if (cityName === 'amsterdam') {
+        if (this.cityName === 'amsterdam') {
             rating = 5;
         }
 
@@ -23,7 +23,7 @@ class CityRating {
 
     getEnvironmentalImpact() {
         let rating = 4;
-        if (cityName === 'amsterdam') {
+        if (this.cityName === 'amsterdam') {
             rating = 3;
         }
 
@@ -32,7 +32,7 @@ class CityRating {
 
     getWellBeing() {
         let rating = 5;
-        if (cityName === 'amsterdam') {
+        if (this.cityName === 'amsterdam') {
             rating = 4;
         }
 

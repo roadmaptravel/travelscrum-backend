@@ -1,20 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const CovidControls = require('../services/CovidControls');
-const ResolveGeoName = require('../services/ResolveGeoName');
 const ResponseNormalizer = require('../services/ResponseNormalizer');
+const ResolveGeoName = require('../services/ResolveGeoName');
+const CityRating = require('../services/CityRating');
+const CovidControls = require('../services/CovidControls');
 
 /* GET API response. */
 router.get('/', async function (req, res, next) {
     const countryCode = req.query.countryCode;
     const cityName = req.query.cityName;
 
+    //ResponseNormalizer
     const responseNormalizer = new ResponseNormalizer();
 
     //Geo Name
     const resolveGeoName = new ResolveGeoName();
     const geoName = resolveGeoName.fromCityName(cityName);
     responseNormalizer.setGeoName(geoName);
+
+    //City Rating
+    const cityRating = new CityRating(geoName.cityName);
+    const ratings = cityRating.getRatings();
+    responseNormalizer.setCityRating(ratings);
 
     //Covidcontrols API
     const covidControls = new CovidControls();

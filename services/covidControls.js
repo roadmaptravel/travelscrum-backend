@@ -15,7 +15,7 @@ class CovidControls {
             searchParams: searchParams
         });
 
-        const obj = JSON.parse(response.body)
+        const obj = JSON.parse(response.body);
         const countryArray = _.filter(obj, { 'cId': countryId });
         let country = null;
         if (countryArray.length > 0) {
