@@ -9,9 +9,12 @@ const CovidControls = require('../services/covidControls');
 router.get('/', async function (req, res, next) {
     const countryCode = req.query.countryCode;
     const cityName = req.query.cityName;
+    const departureDate = req.query.departureDate;
+    const returnDate = req.query.returnDate;
 
     //ResponseNormalizer
     const responseNormalizer = new ResponseNormalizer();
+    responseNormalizer.setDates(departureDate, returnDate);
 
     //Geo Name
     const resolveGeoName = new ResolveGeoName();

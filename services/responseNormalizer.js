@@ -2,6 +2,7 @@ class ResponseNormalizer {
 
     getResponse() {
         const response = {};
+        response.dates = {};
         response.geoInfo = {};
         response.ratings = {};
 
@@ -28,6 +29,14 @@ class ResponseNormalizer {
         response.pages.trustedPartners = {};
 
         this.amendWithMockData(response);
+
+        if (this.departureDate) {
+            response.dates.departureDate = this.departureDate
+        }
+
+        if (this.returnDate) {
+            response.dates.returnDate = this.returnDate
+        }
 
         if (this.geoName) {
             response.geoInfo.cityName = this.geoName.cityName;
@@ -67,7 +76,7 @@ class ResponseNormalizer {
 
         //Country - Outbreak
         response.pages.country.outbreak.infectedPopulation = '0.28%';
-        response.pages.country.outbreak.infectedPopulation = '0.03%';
+        response.pages.country.outbreak.deathPopulation = '0.03%';
         response.pages.country.outbreak.infectionRiskScore = '3/100';
 
         //Country - Arrive at destination
@@ -129,6 +138,11 @@ class ResponseNormalizer {
         }
 
         return normalizedRecovered;
+    }
+
+    setDates(departureDate, returnDate) {
+        this.departureDate = departureDate;
+        this.returnDate = returnDate;
     }
 
     setGeoName(geoName) {
