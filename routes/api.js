@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const ResponseNormalizer = require('../services/ResponseNormalizer');
-const ResolveGeoName = require('../services/ResolveGeoName');
-const CityRating = require('../services/CityRating');
-const CovidControls = require('../services/CovidControls');
+const ResponseNormalizer = require('../services/responseNormalizer');
+const ResolveGeoName = require('../services/resolveGeoName');
+const CityRating = require('../services/cityRating');
+const CovidControls = require('../services/covidControls');
 
 /* GET API response. */
 router.get('/', async function (req, res, next) {
