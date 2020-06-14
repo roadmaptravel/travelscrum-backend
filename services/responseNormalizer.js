@@ -48,20 +48,20 @@ class ResponseNormalizer {
     getDateFromTimestamp(timestamp) {
         const date = new Date(this.covidControls.lastUpdated);
         //Just hardcode US date formatting
-        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     }
 
     getRecovered(recovered) {
         let normalizedRecovered = 'Not reported';
         if (recovered && recovered > 0) {
-            normalizedRecovered = recovered
+            normalizedRecovered = recovered;
         }
 
         return normalizedRecovered;
     }
 
     setGeoName(geoName) {
-        this.geoName = geoName
+        this.geoName = geoName;
     }
 
     setCityRating(cityRating) {
