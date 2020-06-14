@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ResponseNormalizer = require('../services/responseNormalizer');
-const ResolveGeoName = require('../services/resolveGeoName');
+const ResolveGeoInfo = require('../services/resolveGeoInfo');
 const CityRating = require('../services/cityRating');
 const CovidControls = require('../services/covidControls');
 const Sherpa = require('../services/sherpa');
@@ -18,40 +18,40 @@ router.get('/', async function (req, res, next) {
     responseNormalizer.setDates(departureDate, returnDate);
 
     //Geo Name
-    const resolveGeoName = new ResolveGeoName();
-    const geoName = resolveGeoName.fromCityName(cityName);
-    responseNormalizer.setGeoName(geoName);
+    const resolveGeoInfo = new ResolveGeoInfo();
+    const geoInfo = resolveGeoInfo.fromCityName(cityName);
+    responseNormalizer.setGeoInfo(geoInfo);
 
     //City Rating
-    if (geoName && geoName.cityName) {
-        const cityRating = new CityRating(geoName.cityName);
+    if (geoInfo && geoInfo.cityName) {
+        const cityRating = new CityRating(geoInfo.cityName);
         const ratings = cityRating.getRatings();
         responseNormalizer.setCityRating(ratings);
     }
 
     //Covidcontrols API
     const covidControls = new CovidControls();
-    const covidControlsParam = getCovidControlsParam(countryCode, geoName);
+    const covidControlsParam = getCovidControlsParam(countryCode, geoInfo);
     const covidControlsResponse = await covidControls.getInfoByCountryId(covidControlsParam);
     responseNormalizer.setCovidControls(covidControlsResponse);
 
     //Sherpa API
-    if (geoName && geoName.countryCode && geoName.countryCode3) {
+    if (geoInfo && geoInfo.countryCode && geoInfo.countryCode3) {
         const sherpa = new Sherpa();
-        const shearpaResponse = await sherpa.getInfoByCountryId(geoName.countryCode, geoName.countryCode3);
+        const shearpaResponse = await sherpa.getInfoByCountryId(geoInfo.countryCode, geoInfo.countryCode3);
         responseNormalizer.setSherpa(shearpaResponse);
     }
 
     res.send(responseNormalizer.getResponse());
 });
 
-function getCovidControlsParam(countryCode, geoName) {
+function getCovidControlsParam(countryCode, geoInfo) {
     let covidControlsParam = null;
 
     if (!isEmpty(countryCode)) {
         covidControlsParam = countryCode;
-    } else if (geoName) {
-        covidControlsParam = geoName.stateCode || geoName.countryCode;
+    } else if (geoInfo) {
+        covidControlsParam = geoInfo.stateCode || geoInfo.countryCode;
     }
 
     return covidControlsParam;

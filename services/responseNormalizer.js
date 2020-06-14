@@ -38,11 +38,11 @@ class ResponseNormalizer {
             response.dates.returnDate = this.returnDate
         }
 
-        if (this.geoName) {
-            response.geoInfo.cityName = this.geoName.cityName;
-            response.geoInfo.stateCode = this.geoName.stateCode;
-            response.geoInfo.countryName = this.geoName.countryName;
-            response.geoInfo.countryCode = this.geoName.countryCode;
+        if (this.geoInfo) {
+            response.geoInfo.cityName = this.geoInfo.cityName;
+            response.geoInfo.stateCode = this.geoInfo.stateCode;
+            response.geoInfo.countryName = this.geoInfo.countryName;
+            response.geoInfo.countryCode = this.geoInfo.countryCode;
         }
 
         if (this.cityRating) {
@@ -167,8 +167,8 @@ class ResponseNormalizer {
         this.returnDate = returnDate;
     }
 
-    setGeoName(geoName) {
-        this.geoName = geoName;
+    setGeoInfo(geoInfo) {
+        this.geoInfo = geoInfo;
     }
 
     setCityRating(cityRating) {
@@ -184,7 +184,7 @@ class ResponseNormalizer {
     }
 
     printJson(json) {
-        var jsonString = JSON.stringify(json, null, 2);
+        const jsonString = JSON.stringify(json, null, 2);
         console.log(`jsonString = ${jsonString}`);
     }
 }

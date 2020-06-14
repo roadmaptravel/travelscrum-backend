@@ -1,4 +1,4 @@
-class ResolveGeoName {
+class ResolveGeoInfo {
 
     fromCityName(cityName) {
         let country = null;
@@ -26,4 +26,4 @@ class ResolveGeoName {
     }
 }
 
-module.exports = ResolveGeoName;
+module.exports = ResolveGeoInfo;

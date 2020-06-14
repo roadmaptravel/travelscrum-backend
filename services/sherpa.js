@@ -54,7 +54,7 @@ class Sherpa {
     }
 
     printJson(json) {
-        var jsonString = JSON.stringify(json, null, 2);
+        const jsonString = JSON.stringify(json, null, 2);
         console.log(jsonString);
     }
 }
