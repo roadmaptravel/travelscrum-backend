@@ -5,6 +5,7 @@ const ResolveGeoInfo = require('../services/resolveGeoInfo');
 const CityRating = require('../services/cityRating');
 const CovidControls = require('../services/covidControls');
 const Sherpa = require('../services/sherpa');
+const Sitata = require('../services/sitata');
 
 /* GET API response. */
 router.get('/', async function (req, res, next) {
@@ -40,6 +41,13 @@ router.get('/', async function (req, res, next) {
         const sherpa = new Sherpa();
         const shearpaResponse = await sherpa.getInfoByCountryId(geoInfo.countryCode, geoInfo.countryCode3);
         responseNormalizer.setSherpa(shearpaResponse);
+    }
+
+    //Sitata API
+    if (geoInfo && geoInfo.countryCode) {
+        const sitata = new Sitata();
+        const sitataResponse = await sitata.getInfoByCountryCode(geoInfo.countryCode);
+        responseNormalizer.setSitata(sitataResponse);
     }
 
     res.send(responseNormalizer.getResponse());

@@ -52,9 +52,6 @@ class ResponseNormalizer {
         }
 
         if (this.covidControls) {
-            response.pages.country.outbreak.totalCases = this.covidControls.sick;
-            response.pages.country.outbreak.deathCases = this.covidControls.dead;
-            response.pages.country.outbreak.recovered = this.getRecovered(this.covidControls.recovered);
             response.pages.country.outbreak.lockDown = this.covidControls.lockdownInfo.lockdown;
             response.geoInfo.lockDown = this.covidControls.lockdownInfo.lockdown;
             response.pages.country.outbreak.lastUpdated = this.getDateFromTimestamp(this.covidControls.lastUpdated);
@@ -87,6 +84,20 @@ class ResponseNormalizer {
                     response.pages.country.arriveDestination.mandatoryBusinessLetter = this.getTitleContentPair(this.sherpa.procedures.data[2].attributes.title, this.sherpa.procedures.data[2].attributes.description);
                 }
             }
+        }
+
+        if (this.sitata) {
+            response.pages.country.outbreak.totalCases = this.sitata.summary.active_count;
+            response.pages.country.outbreak.deathCases = this.sitata.summary.death_count;
+            response.pages.country.outbreak.recovered = this.getRecovered(this.sitata.summary.recovered_count);
+        
+            const infectedPopulation = this.sitata.summary.active_density / 1000
+            response.pages.country.outbreak.infectedPopulation = `${infectedPopulation.toFixed(2)}%`;
+            const deathPopulation = this.sitata.summary.death_density / 1000
+            response.pages.country.outbreak.deathPopulation = `${deathPopulation.toFixed(2)}%`;
+
+            //Not using the `sitata_risk` because the numbers seem unlikely
+            // response.pages.country.outbreak.infectionRiskScore = `${this.sitata.summary.sitata_risk}/100`;
         }
 
         return JSON.stringify(response, null, 2);
@@ -181,6 +192,10 @@ class ResponseNormalizer {
 
     setSherpa(sherpa) {
         this.sherpa = sherpa;
+    }
+
+    setSitata(sitata) {
+        this.sitata = sitata;
     }
 
     printJson(json) {

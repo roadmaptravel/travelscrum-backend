@@ -1,0 +1,21 @@
+{
+	"country": {
+		"country_code": "NL",
+		"id": "54e44cf3-99aa-4c1a-b6df-781728246bd4",
+		"population": 17018408,
+		"topojson_url": "https://www.googleapis.com/download/storage/v1/b/sitata-geography-prod/o/countries%2FNL-3cae6f0f1a6542d8b7c82bba5c7e9199.topo.json?generation=1539876584508607&alt=media"
+	},
+	"summary": {
+		"active_count": 42408,
+		"active_density": 249.1889958214658,
+		"case_count": 48461,
+		"case_density": 284.7563649901918,
+		"death_count": 6053,
+		"death_density": 35.56736916872601,
+		"irregular": false,
+		"recovered_count": 0,
+		"recovered_density": 0,
+		"reported_on": "2020-06-12",
+		"sitata_risk": 98.81304550201898
+	}
+}
