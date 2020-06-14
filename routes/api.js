@@ -19,9 +19,11 @@ router.get('/', async function (req, res, next) {
     responseNormalizer.setGeoName(geoName);
 
     //City Rating
-    const cityRating = new CityRating(geoName.cityName);
-    const ratings = cityRating.getRatings();
-    responseNormalizer.setCityRating(ratings);
+    if (geoName && geoName.cityName) {
+        const cityRating = new CityRating(geoName.cityName);
+        const ratings = cityRating.getRatings();
+        responseNormalizer.setCityRating(ratings);
+    }
 
     //Covidcontrols API
     const covidControls = new CovidControls();
