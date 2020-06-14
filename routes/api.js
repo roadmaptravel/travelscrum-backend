@@ -4,6 +4,7 @@ const ResponseNormalizer = require('../services/responseNormalizer');
 const ResolveGeoName = require('../services/resolveGeoName');
 const CityRating = require('../services/cityRating');
 const CovidControls = require('../services/covidControls');
+const Sherpa = require('../services/sherpa');
 
 /* GET API response. */
 router.get('/', async function (req, res, next) {
@@ -33,6 +34,13 @@ router.get('/', async function (req, res, next) {
     const covidControlsParam = getCovidControlsParam(countryCode, geoName);
     const covidControlsResponse = await covidControls.getInfoByCountryId(covidControlsParam);
     responseNormalizer.setCovidControls(covidControlsResponse);
+
+    //Sherpa API
+    if (geoName && geoName.countryCode && geoName.countryCode3) {
+        const sherpa = new Sherpa();
+        const shearpaResponse = await sherpa.getInfoByCountryId(geoName.countryCode, geoName.countryCode3);
+        responseNormalizer.setSherpa(shearpaResponse);
+    }
 
     res.send(responseNormalizer.getResponse());
 });

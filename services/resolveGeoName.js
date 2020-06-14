@@ -9,14 +9,16 @@ class ResolveGeoName {
                 cityName: 'Amsterdam',
                 stateCode: null,
                 countryName: 'The Netherlands',
-                countryCode: 'NL'
+                countryCode: 'NL',
+                countryCode3: 'NLD'
             };
         } else {
             country = {
                 cityName: 'New York',
                 stateCode: "NY_US",
                 countryName: 'United States of America',
-                countryCode: 'US'
+                countryCode: 'US',
+                countryCode3: 'USA'
             };
         }
 

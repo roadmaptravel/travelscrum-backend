@@ -67,6 +67,28 @@ class ResponseNormalizer {
             response.pages.city.foodAndEntertainment.touristAttractions = this.getTitleContentPair('Tourist attractions', this.covidControls.lockdownInfo.touristAttractions);
         }
 
+        if (this.sherpa) {
+            if (this.sherpa.restrictions) {
+                if (this.sherpa.restrictions.data.length > 0) {
+                    response.pages.country.arriveDestination.entryRestrictions = this.getTitleContentPair(this.sherpa.restrictions.data[0].attributes.title, this.sherpa.restrictions.data[0].attributes.description);
+                }
+            }
+
+            if (this.sherpa.procedures) {
+                if (this.sherpa.procedures.data.length > 0) {
+                    response.pages.country.arriveDestination.quarantine = this.getTitleContentPair(this.sherpa.procedures.data[0].attributes.title, this.sherpa.procedures.data[0].attributes.description);
+                }
+
+                if (this.sherpa.procedures.data.length > 1) {
+                    response.pages.country.arriveDestination.mandatoryHealthDeclaration = this.getTitleContentPair(this.sherpa.procedures.data[1].attributes.title, this.sherpa.procedures.data[1].attributes.description);
+                }
+
+                if (this.sherpa.procedures.data.length > 2) {
+                    response.pages.country.arriveDestination.mandatoryBusinessLetter = this.getTitleContentPair(this.sherpa.procedures.data[2].attributes.title, this.sherpa.procedures.data[2].attributes.description);
+                }
+            }
+        }
+
         return JSON.stringify(response, null, 2);
     }
 
@@ -155,6 +177,10 @@ class ResponseNormalizer {
 
     setCovidControls(covidControls) {
         this.covidControls = covidControls;
+    }
+
+    setSherpa(sherpa) {
+        this.sherpa = sherpa;
     }
 
     printJson(json) {
