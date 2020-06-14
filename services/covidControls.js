@@ -16,11 +16,15 @@ class CovidControls {
         });
 
         const obj = JSON.parse(response.body)
-        const country = _.filter(obj, { 'cId': countryId });
-        // printJson(country)
+        const countryArray = _.filter(obj, { 'cId': countryId });
+        let country = null;
+        if (countryArray.length > 0) {
+            country = countryArray[0];
+        }
+        // this.printJson(country)
 
         console.log(response.url);
-        return JSON.stringify(country, null, 2)
+        return country;
     }
 
     objectToArray(obj) {
