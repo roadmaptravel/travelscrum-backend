@@ -37,11 +37,11 @@ router.get('/', async function (req, res, next) {
     responseNormalizer.setCovidControls(covidControlsResponse);
 
     //Sherpa API
-    if (geoInfo && geoInfo.countryCode && geoInfo.countryCode3) {
-        const sherpa = new Sherpa();
-        const shearpaResponse = await sherpa.getInfoByCountryId(geoInfo.countryCode, geoInfo.countryCode3);
-        responseNormalizer.setSherpa(shearpaResponse);
-    }
+    // if (geoInfo && geoInfo.countryCode && geoInfo.countryCode3) {
+    //     const sherpa = new Sherpa();
+    //     const shearpaResponse = await sherpa.getInfoByCountryId(geoInfo.countryCode, geoInfo.countryCode3);
+    //     responseNormalizer.setSherpa(shearpaResponse);
+    // }
 
     //Sitata API
     if (geoInfo && geoInfo.countryCode) {
